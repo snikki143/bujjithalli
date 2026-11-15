@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#210b18">
+<title>A Little Surprise for Aanya</title>
+<style>
+:root{--bg:#180914;--wine:#4b102c;--pink:#ff78b7;--rose:#ffb4d4;--gold:#f4d49a;--white:#fff5fa}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(circle at 50% 15%,#54203c 0,#210d1b 42%,#100710 100%);color:var(--white);font-family:Georgia,'Times New Roman',serif;overflow-x:hidden}
+button{font:inherit}
+.screen{min-height:100svh;display:flex;align-items:center;justify-content:center;padding:28px 18px;position:relative;overflow:hidden}
+#intro{text-align:center;flex-direction:column}
+.eyebrow{font:600 11px/1.5 Arial,sans-serif;letter-spacing:4px;text-transform:uppercase;color:var(--gold)}
+h1{font-size:clamp(38px,9vw,76px);font-weight:400;line-height:1.05;margin:18px 0;color:#fff0f6}
+.tap{border:1px solid rgba(255,180,212,.65);background:linear-gradient(135deg,#9e285c,#57152f);color:white;padding:16px 30px;border-radius:999px;letter-spacing:1px;box-shadow:0 0 28px #ff6ca455;cursor:pointer;animation:pulse 1.8s infinite}
+@keyframes pulse{50%{transform:scale(1.06);box-shadow:0 0 42px #ff6ca488}}
+.big-heart{font-size:82px;margin:16px 0;filter:drop-shadow(0 0 18px #ff4e91);animation:heartbeat 1.3s infinite}
+@keyframes heartbeat{0%,100%{transform:scale(1)}15%{transform:scale(1.13)}30%{transform:scale(1)}45%{transform:scale(1.08)}}
+#reveal{position:fixed;inset:0;background:#160813;display:none;z-index:10;align-items:center;justify-content:center;pointer-events:none}
+#reveal span{font-size:clamp(100px,35vw,260px);color:#ff3f85;filter:drop-shadow(0 0 35px #ff3f85);animation:heartOpen 1.7s forwards}
+@keyframes heartOpen{0%{transform:scale(.2);opacity:0}45%{transform:scale(1.5);opacity:1}100%{transform:scale(15);opacity:0}}
+#main{display:none;padding:55px 18px 80px}
+.content{width:min(760px,100%);margin:auto;text-align:center;position:relative;z-index:1}
+.kicker{color:var(--gold);font:11px Arial,sans-serif;letter-spacing:4px;text-transform:uppercase}
+h2{font-size:clamp(36px,8vw,62px);font-weight:400;margin:16px 0;color:#ffe7f1}
+.subtitle{color:#f5c4d7;font-size:18px}
+.card{margin:28px auto;padding:clamp(23px,5vw,42px);border:1px solid #f7b6d544;border-radius:25px;background:linear-gradient(145deg,#ffffff12,#ffffff05);box-shadow:0 20px 70px #0005;backdrop-filter:blur(12px);text-align:left}
+.card p{font-size:17px;line-height:1.9;color:#ffeaf2;margin:0 0 15px}
+.card p:last-child{margin-bottom:0}
+.signature{text-align:right;color:var(--gold);font-style:italic;font-size:20px;margin-top:22px}
+.timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:28px 0}
+.moment{border:1px solid #f7b6d533;border-radius:18px;padding:18px 10px;background:#ffffff09}
+.moment b{display:block;color:var(--rose);font-size:24px;margin-bottom:7px}
+.moment span{font:11px Arial,sans-serif;letter-spacing:1px;color:#f8dce8}
+.surprise{margin:28px auto;padding:24px;border:1px solid #f4d49a55;border-radius:22px;background:#f4d49a0d}
+.surprise h3{font-size:27px;font-weight:400;color:var(--gold);margin:0 0 10px}
+.surprise p{line-height:1.7;color:#ffeaf2}
+.action{border:1px solid #f7b6d577;background:#8d2855;color:white;padding:14px 22px;border-radius:999px;cursor:pointer;margin:8px;box-shadow:0 0 22px #ff6ca433}
+.hidden-note{display:none;margin:18px auto 0;padding:18px;border-radius:16px;background:#ffffff10;color:#ffeaf2;line-height:1.8}
+footer{margin-top:40px;color:#d9a9bf;font:11px Arial,sans-serif;letter-spacing:2px}
+.float-heart{position:fixed;bottom:-35px;z-index:5;pointer-events:none;color:#ff83bd;text-shadow:0 0 12px #ff5fa2,0 0 25px #ff69b4;animation:rise 6s linear forwards,glow 1.3s infinite alternate}
+@keyframes rise{to{transform:translateY(-115vh) rotate(35deg);opacity:0}}
+@keyframes glow{to{filter:drop-shadow(0 0 9px #ff82d2)}}
+.spark{position:fixed;width:5px;height:5px;border-radius:50%;background:#ffe4a8;box-shadow:0 0 12px #ffd98b;pointer-events:none;animation:sparkle 2s ease-out forwards;z-index:3}
+@keyframes sparkle{to{transform:translate(var(--x),var(--y)) scale(0);opacity:0}}
+@media(max-width:520px){.timeline{gap:7px}.moment{padding:14px 5px}.moment b{font-size:20px}.moment span{font-size:9px}.card p{font-size:16px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<section class="screen" id="intro">
+  <div class="eyebrow">A tiny surprise, made with love</div>
+  <div class="big-heart">♥</div>
+  <h1>Someone special<br>has a surprise...</h1>
+  <p class="subtitle">A little moment, just for you.</p>
+  <button class="tap" onclick="openSurprise()">Tap to see your surprise ✨</button>
+</section>
+
+<div id="reveal"><span>♥</span></div>
+
+<main id="main">
+  <div class="content">
+    <div class="kicker">A day worth celebrating</div>
+    <h2>Happy Anniversary,<br><span style="color:#ff8fbd">Aanya</span> & <span style="color:#f4d49a">Arjun</span> ♥</h2>
+    <p class="subtitle">Three years of memories, laughter and choosing each other.</p>
+
+    <div class="card">
+      <p>Hey Aanya,</p>
+      <p>Some people come into our lives quietly, and before we even realise it, they become one of the most beautiful parts of our story. You are that person to me, Aanya. You have turned ordinary days into memories I want to keep forever. A simple conversation, a random laugh, a silly joke or even a little moment of silence with you can mean more than a hundred grand celebrations.</p>
+      <p>When I look back at these three years, I don't just remember dates or occasions. I remember the little things: the first conversations, the excitement of getting to know each other, the smiles that came without a reason, the unexpected surprises, the moments when we laughed until we forgot everything else, and all those small memories that only we would understand.</p>
+      <p>Of course, no journey is perfect. Every relationship has its own chapters, its unexpected turns, its lessons and its challenges. What makes our story special is not that every day was perfect, but that every experience became a part of the journey that brought us to this moment. I hope we continue learning, understanding each other better and making space for each other's dreams.</p>
+      <p>Thank you for the happiness you have brought into my life. Thank you for the time, the care, the patience, the conversations and the memories. Thank you for being someone I can think of and smile. I hope I make you feel just as valued and appreciated, not only on special days like this, but in all the ordinary days in between.</p>
+      <p>If I could wish for one thing, it would be that we never stop finding reasons to celebrate each other. May we keep discovering new places, trying new things, taking silly pictures, sharing our favourite songs, having long conversations and collecting stories that we will look back on years from now with the biggest smiles.</p>
+      <p>I hope the future brings us beautiful opportunities, peaceful days, exciting adventures and countless reasons to be proud of how far we have come. Whatever new chapters life writes for us, I hope they are filled with kindness, honesty, laughter and a love that grows through every season.</p>
+      <p>And today, I just want you to pause for a moment and remember how special you are. You deserve thoughtful gestures, genuine happiness, beautiful surprises and all the little things that make your heart feel full. This page is only a small gesture, but every detail was made to bring a smile to your face.</p>
+      <p>Here's to the memories behind us, the moments we are living right now, and all the wonderful memories still waiting ahead. Three years down, and hopefully many more beautiful chapters to write together. Happy anniversary, Aanya. You make this story worth celebrating.</p>
+      <div class="signature">With all my love, Arjun ♥</div>
+    </div>
+
+    <div class="timeline">
+      <div class="moment"><b>♥</b><span>THE FIRST HELLO</span></div>
+      <div class="moment"><b>∞</b><span>COUNTLESS MEMORIES</span></div>
+      <div class="moment"><b>✧</b><span>MORE TO COME</span></div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">A few things I hope we never forget</div>
+      <h3 style="font-size:29px;font-weight:400;color:#ffe7f1;margin:12px 0 20px">Our little promises</h3>
+      <p>♡ To keep making time for each other, even when life gets busy.</p>
+      <p>♡ To listen with patience, speak with kindness and celebrate each other's wins.</p>
+      <p>♡ To never stop laughing at the little things that make us, us.</p>
+      <p>♡ To keep surprising each other, not only with gifts, but with thoughtful moments.</p>
+      <p>♡ To keep growing as individuals while cheering for each other's dreams.</p>
+    </div>
+
+    <div class="surprise">
+      <h3>One more little surprise...</h3>
+      <p>There is a tiny message waiting for you. Tap below to open it.</p>
+      <button class="action" onclick="showNote()">Open your secret note 💌</button>
+      <div class="hidden-note" id="note">If I could save one feeling from all our memories, it would be the happiness of having you in my life. Here's to us, today and always. ♥</div>
+    </div>
+
+    <div class="card" style="text-align:center">
+      <div class="kicker">A little thought for the future</div>
+      <h3 style="font-size:30px;font-weight:400;color:#ffe7f1;margin:14px 0">The best is yet to come</h3>
+      <p>One day, we'll look back at these moments and smile at how much we've experienced, how much we've learned and how many memories we've collected. Until then, let's keep choosing joy, making plans, taking chances and turning simple days into our favourite stories.</p>
+      <p style="color:#f4d49a;font-style:italic">Not just a date to remember, but a journey to keep celebrating. ♥</p>
+    </div>
+
+    <button class="action" onclick="celebrate()">Make it sparkle ✨</button>
+    <footer>MADE WITH LOVE · A LITTLE SURPRISE JUST FOR YOU</footer>
+  </div>
+</main>
+
+<script>
+function openSurprise(){
+  const reveal=document.getElementById('reveal');
+  reveal.style.display='flex';
+  setTimeout(()=>{
+    document.getElementById('intro').style.display='none';
+    reveal.style.display='none';
+    document.getElementById('main').style.display='block';
+    window.scrollTo(0,0);
+    celebrate();
+    setInterval(floatHeart,650);
+  },1650);
+}
+function floatHeart(){
+  const heart=document.createElement('div');
+  heart.className='float-heart';
+  heart.textContent=['♥','♡','❤'][Math.floor(Math.random()*3)];
+  const shades=['#ff5fa2','#ff83bd','#ffb0d2','#f45b9a','#ffd0e4'];
+  heart.style.color=shades[Math.floor(Math.random()*shades.length)];
+  heart.style.left=(Math.random()*96+2)+'vw';
+  heart.style.fontSize=(17+Math.random()*27)+'px';
+  heart.style.animationDuration=(4.2+Math.random()*2.2)+'s';
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),7000);
+}
+function burstHearts(count=30){
+  for(let i=0;i<count;i++)setTimeout(floatHeart,i*55);
+}
+function celebrate(){
+  burstHearts(45);
+  for(let i=0;i<45;i++){
+    const s=document.createElement('i');s.className='spark';
+    s.style.left=(45+Math.random()*10)+'vw';s.style.top=(35+Math.random()*20)+'vh';
+    s.style.setProperty('--x',(Math.random()*260-130)+'px');
+    s.style.setProperty('--y',(Math.random()*260-130)+'px');
+    document.body.appendChild(s);setTimeout(()=>s.remove(),2100);
+  }
+}
+function showNote(){
+  const note=document.getElementById('note');
+  note.style.display='block';
+  celebrate();
+}
+</script>
+</body>
+</html>
